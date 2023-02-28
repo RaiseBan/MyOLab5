@@ -1,12 +1,4 @@
-/**
- * The CollectionControl class manages a collection of Worker objects and provides methods for manipulating
- * and accessing the data. It implements various operations such as sorting, filtering, grouping and updating
- * the elements of the collection. It also interacts with the FileControl and CommunicationControl classes to
- * read/write data from/to files and receive input from the user, respectively. The class has a HashMap to store
- * the mapping of available commands, and a LocalDateTime variable to keep track of the time of initialization
- * of the collection. The class has public methods for adding, removing and updating elements of the collection,
- * as well as for displaying information about the collection.
- */
+
 package support;
 
 import commands.Command;
@@ -20,7 +12,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * The CollectionControl class manages a collection of Worker objects and provides methods for manipulating
+ * and accessing the data. It implements various operations such as sorting, filtering, grouping and updating
+ * the elements of the collection. It also interacts with the FileControl and CommunicationControl classes to
+ * read/write data from/to files and receive input from the user, respectively. The class has a HashMap to store
+ * the mapping of available commands, and a LocalDateTime variable to keep track of the time of initialization
+ * of the collection. The class has public methods for adding, removing and updating elements of the collection,
+ * as well as for displaying information about the collection.
+ */
 public class CollectionControl {
     private final ArrayList<Worker> workersCollection = new ArrayList<>();
     HashMap<String, Command> BufferOfCommandMap;

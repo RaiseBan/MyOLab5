@@ -1,6 +1,4 @@
-/**
- * The FileControl class provides methods to read and write files related to worker information
- */
+
 package support;
 
 import data.Worker;
@@ -19,7 +17,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * The FileControl class provides methods to read and write files related to worker information
+ */
 public class FileControl {
     private final String[] file;
 

@@ -1,9 +1,4 @@
-/**
- * The {@code AddElement} class represents a command that adds a new worker element to the collection.
- * The command requires instances of {@link CommunicationControl} and {@link CollectionControl} to communicate with the user
- * and modify the collection, respectively.
- * This class extends the {@link AbstractCommand} abstract class.
- */
+
 package commands;
 
 import data.Worker;
@@ -12,7 +7,12 @@ import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.CommunicationControl;
 import support.Console;
-
+/**
+ * The {@code AddElement} class represents a command that adds a new worker element to the collection.
+ * The command requires instances of {@link CommunicationControl} and {@link CollectionControl} to communicate with the user
+ * and modify the collection, respectively.
+ * This class extends the {@link AbstractCommand} abstract class.
+ */
 public class AddElement extends AbstractCommand {
 
     private CommunicationControl communicationControl;

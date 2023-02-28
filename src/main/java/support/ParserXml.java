@@ -1,8 +1,4 @@
-/**
- * The ParserXml class is responsible for parsing worker data from an XML file.
- * It uses the javax.xml.parsers library to read the XML file and extract the
- * necessary data, and creates Worker objects with the extracted data.
- */
+
 package support;
 
 import data.*;
@@ -25,7 +21,11 @@ import java.util.List;
 import java.util.Locale;
 
 import static support.CommunicationControl.containsOnlyDigitsOrLetters;
-
+/**
+ * The ParserXml class is responsible for parsing worker data from an XML file.
+ * It uses the javax.xml.parsers library to read the XML file and extract the
+ * necessary data, and creates Worker objects with the extracted data.
+ */
 public class ParserXml {
     String file;
 

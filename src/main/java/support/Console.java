@@ -1,7 +1,4 @@
-/**
- * A class that represents a console for interacting with the program. It handles user input, executes commands, and
- * outputs messages to the console.
- */
+
 package support;
 
 import commands.Command;
@@ -11,7 +8,10 @@ import exceptions.InputException;
 
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * A class that represents a console for interacting with the program. It handles user input, executes commands, and
+ * outputs messages to the console.
+ */
 public class Console {
     private final Scanner scanner;
     private FileControl fileControl;

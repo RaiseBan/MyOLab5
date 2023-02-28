@@ -1,7 +1,4 @@
-/**
- * The RemoveGreater class represents a command to remove all elements from the collection
- * that are greater than the specified element.
- */
+
 package commands;
 
 import data.Worker;
@@ -11,7 +8,10 @@ import support.CollectionControl;
 import support.CommunicationControl;
 import support.Console;
 
-
+/**
+ * The RemoveGreater class represents a command to remove all elements from the collection
+ * that are greater than the specified element.
+ */
 public class RemoveGreater extends AbstractCommand {
     CollectionControl collectionControl;
     CommunicationControl communicationControl;

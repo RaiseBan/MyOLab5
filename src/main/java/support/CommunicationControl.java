@@ -1,7 +1,4 @@
-/**
- * The CommunicationControl class provides methods for communicating with the user through the console.
- * It allows setting and getting user's personal information, such as name, height and passport ID.
- */
+
 package support;
 
 import data.*;
@@ -17,7 +14,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+/**
+ * The CommunicationControl class provides methods for communicating with the user through the console.
+ * It allows setting and getting user's personal information, such as name, height and passport ID.
+ */
 
 public class CommunicationControl {
     public Scanner scanner;
@@ -85,7 +85,7 @@ public class CommunicationControl {
                 flagForScr = true;
                 return name;
             } catch (EmptyInputException | InputException e) {
-                Console.err("Имя не корректно!");
+                Console.err("name is not correct!");
             } finally {
                 if ((!loop) && (!flagForScr)) {
                     throw new InputException();

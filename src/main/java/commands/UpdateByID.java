@@ -1,11 +1,12 @@
-/**
- * This command is used to update the value of a collection element whose id matches the specified one.
- */
+
 package commands;
 
 import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.Console;
+/**
+ * This command is used to update the value of a collection element whose id matches the specified one.
+ */
 
 public class UpdateByID extends AbstractCommand {
     CollectionControl collectionControl;

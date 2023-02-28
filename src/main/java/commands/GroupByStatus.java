@@ -1,12 +1,12 @@
-/**
- * This command groups the elements of the collection by the value of the status field and displays the number of elements in each group.
- */
+
 package commands;
 
 import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.Console;
-
+/**
+ * This command groups the elements of the collection by the value of the status field and displays the number of elements in each group.
+ */
 public class GroupByStatus extends AbstractCommand {
     CollectionControl collectionControl;
 

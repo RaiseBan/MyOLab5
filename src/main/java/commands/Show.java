@@ -4,6 +4,10 @@ import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.Console;
 
+/**
+ * Command
+ */
+
 public class Show extends AbstractCommand {
     CollectionControl collectionControl;
 

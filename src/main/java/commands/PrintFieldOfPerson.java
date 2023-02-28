@@ -1,6 +1,5 @@
 package commands;
 
-import data.Person;
 import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.Console;

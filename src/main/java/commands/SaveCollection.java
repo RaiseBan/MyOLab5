@@ -1,14 +1,14 @@
-/**
- * The {@code Show} class represents a command that outputs all elements of the collection in string representation.
- * Implements {@link Command} interface.
- */
+
 package commands;
 
 import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.Console;
 import support.FileControl;
-
+/**
+ * The {@code Show} class represents a command that outputs all elements of the collection in string representation.
+ * Implements {@link Command} interface.
+ */
 public class SaveCollection extends AbstractCommand {
     FileControl fileControl;
     CollectionControl collectionControl;

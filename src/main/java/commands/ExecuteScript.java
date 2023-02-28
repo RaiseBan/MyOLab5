@@ -1,6 +1,4 @@
-/**
- * The ExecuteScript class represents a command to execute a script file.
- */
+
 
 package commands;
 
@@ -12,7 +10,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
+/**
+ * The ExecuteScript class represents a command to execute a script file.
+ */
 public class ExecuteScript extends AbstractCommand {
     CollectionControl collectionControl;
     CommunicationControl communicationControl;
@@ -59,7 +59,9 @@ public class ExecuteScript extends AbstractCommand {
                     String[] args = (line.trim() + " ").split(" ");
                     HashMap<String, Command> commandMap = collectionControl.sendCommandMap();
                     for (String key : commandMap.keySet()) {
-                        if ((key.equalsIgnoreCase(args[0].trim())) && (!key.equalsIgnoreCase("execute_script"))) {
+                        if ((key.equalsIgnoreCase("execute_script")) && (args[1].equals(argument)))
+                            throw new WrongArgumentsException();
+                        if (key.equalsIgnoreCase(args[0].trim())) {
                             String argumentForExecute;
                             if (args.length == 2) {
                                 argumentForExecute = args[1];
@@ -72,8 +74,10 @@ public class ExecuteScript extends AbstractCommand {
                         }
                     }
                 }
+            }catch (WrongArgumentsException e){
+                Console.err("аргументик то, не тот ЫХХЫХЫХЫ");
             } catch (Exception e) {
-                e.printStackTrace();
+                Console.err("что-то пошло не так (");
             } finally {
                 // Восстанавливаем стандартный поток ввода
                 communicationControl.setUnsetLoop();

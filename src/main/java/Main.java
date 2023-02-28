@@ -3,6 +3,10 @@ import support.*;
 
 import java.util.Scanner;
 
+/**
+ * Entry point to the program. Creates objects for the program to work
+ */
+
 public class Main {
     /**
      * The main method is the entry point of the program. It creates instances of

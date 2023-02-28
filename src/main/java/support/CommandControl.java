@@ -1,13 +1,13 @@
-/**
- * The {@code CommandControl} class is responsible for mapping commands and storing them in a HashMap for easy access.
- * It also provides a reference to the {@code CollectionControl} object that manages the collection.
- */
+
 package support;
 
 import commands.Command;
 
 import java.util.HashMap;
-
+/**
+ * The {@code CommandControl} class is responsible for mapping commands and storing them in a HashMap for easy access.
+ * It also provides a reference to the {@code CollectionControl} object that manages the collection.
+ */
 public class CommandControl {
     private final HashMap<String, Command> commandMapping = new HashMap<>();
 

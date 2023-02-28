@@ -1,6 +1,4 @@
-/**
- * The Clear class represents a command that clears the collection.
- */
+
 package commands;
 
 import data.Worker;
@@ -8,7 +6,9 @@ import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.CommunicationControl;
 import support.Console;
-
+/**
+ * The Clear class represents a command that clears the collection.
+ */
 public class Clear extends AbstractCommand {
     private CollectionControl collectionControl;
     private CommunicationControl communicationControl;

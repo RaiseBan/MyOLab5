@@ -1,7 +1,4 @@
-/**
- * The {@code FilterGreaterStatus} class represents a command that filters the elements in the collection by the status field
- * and displays those whose value is greater than the specified one.
- */
+
 package commands;
 
 import data.Worker;
@@ -9,7 +6,10 @@ import exceptions.WrongArgumentsException;
 import support.CollectionControl;
 import support.CommunicationControl;
 import support.Console;
-
+/**
+ * The {@code FilterGreaterStatus} class represents a command that filters the elements in the collection by the status field
+ * and displays those whose value is greater than the specified one.
+ */
 public class FilterGreaterStatus extends AbstractCommand {
     CollectionControl collectionControl;
     CommunicationControl communicationControl;
