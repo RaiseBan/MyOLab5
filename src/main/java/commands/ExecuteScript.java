@@ -7,6 +7,7 @@ import exceptions.WrongArgumentsException;
 import support.*;
 import support.Console;
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -59,8 +60,10 @@ public class ExecuteScript extends AbstractCommand {
                     String[] args = (line.trim() + " ").split(" ");
                     HashMap<String, Command> commandMap = collectionControl.sendCommandMap();
                     for (String key : commandMap.keySet()) {
-                        if ((key.equalsIgnoreCase("execute_script")) && (args[1].equals(argument)))
-                            throw new WrongArgumentsException();
+                        if (args.length == 2) {
+                            if ((key.equalsIgnoreCase("execute_script")) && (args[1].equals(argument)))
+                                throw new WrongArgumentsException();
+                        }
                         if (key.equalsIgnoreCase(args[0].trim())) {
                             String argumentForExecute;
                             if (args.length == 2) {
@@ -77,7 +80,7 @@ public class ExecuteScript extends AbstractCommand {
             }catch (WrongArgumentsException e){
                 Console.err("аргументик то, не тот ЫХХЫХЫХЫ");
             } catch (Exception e) {
-                Console.err("что-то пошло не так (");
+                System.out.println(e.getMessage());
             } finally {
                 // Восстанавливаем стандартный поток ввода
                 communicationControl.setUnsetLoop();
