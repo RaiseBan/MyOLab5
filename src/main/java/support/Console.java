@@ -2,11 +2,13 @@
 package support;
 
 import commands.Command;
+import commands.Exit;
 import data.Worker;
 import exceptions.EmptyInputException;
 import exceptions.InputException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**
  * A class that represents a console for interacting with the program. It handles user input, executes commands, and
@@ -40,7 +42,13 @@ public class Console {
      */
     public void interactive() {
         String[] userCommand;
-        List<Worker> setWorkerList = fileControl.readXmlFile();
+        List<Worker> setWorkerList = null;
+        try {
+            setWorkerList = fileControl.readXmlFile();
+        }catch (InputException e){
+            Console.err("нет доступа к файлу...");
+        }
+
         if (setWorkerList != null) {
             for (Worker worker : setWorkerList) {
                 collectionControl.addToCollection(worker);
@@ -58,6 +66,9 @@ public class Console {
                 Console.err("Введенной команды не существет. Введите командочку help");
             } catch (EmptyInputException e) {
                 Console.err(e.getMessage());
+            }catch(NoSuchElementException e){
+                Console.err("НЕльзя так");
+                System.exit(0);
             }
         }
     }

@@ -3,6 +3,7 @@ package support;
 
 import data.Worker;
 import exceptions.EmptyInputException;
+import exceptions.InputException;
 import exceptions.PermissionsDeniedException;
 import exceptions.WrongArgumentsException;
 
@@ -45,7 +46,7 @@ public class FileControl {
      */
     public void writeToFile(ArrayList<Worker> workers, String file) throws IOException, XMLStreamException {
         try {
-            file = file.trim() + "\\workers.xml".trim();
+            file = file.trim().trim();
             XMLOutputFactory factory = XMLOutputFactory.newInstance();
             XMLStreamWriter writer = factory.createXMLStreamWriter(new FileOutputStream(file), "UTF-8");
             writer.writeStartDocument("UTF-8", "1.0");
@@ -74,7 +75,7 @@ public class FileControl {
                 writer.writeEndElement();
                 writer.writeStartElement("person");
                 writer.writeStartElement("birthday");
-                writer.writeCharacters(String.valueOf(worker.getPerson().getBirthday()));
+                writer.writeCharacters(String.valueOf(worker.getPerson().getBirthday()).substring(0, String.valueOf(worker.getPerson().getBirthday()).length() - 6));
                 writer.writeEndElement();
                 writer.writeStartElement("height");
                 writer.writeCharacters(String.valueOf(worker.getPerson().getHeight()));
@@ -112,37 +113,33 @@ public class FileControl {
      *
      * @return a List of workers read from the XML file
      */
-    public List<Worker> readXmlFile() {
+    public List<Worker> readXmlFile() throws InputException {
         try {
             if (file.length != 1) {
                 // Генерируем WrongArgumentsException, если в массиве не ровно один аргумент
                 throw new WrongArgumentsException();
             }
-            checkFilePermissions(this.file[0]);
+            if (!checkFilePermissions(this.file[0])) {
+                throw new InputException();
+            }
 
             ParserXml parserXml = new ParserXml(this.file[0]);
             return parserXml.parseWorkersFromXML();
 
-        } catch (EmptyInputException e) {
-            Console.err("в аргумент командной строки было передано null");
-        } catch (FileNotFoundException e) {
-            Console.err("Файл не найден, проверьте XPath");
+
         } catch (WrongArgumentsException e) {
             Console.err("В арументы командной сроки было переданно " + this.file.length +
                     " количество аргументов должно быть 1");
-        } catch (IOException e) {
-            Console.err("Права этого файла не позволяют использовать его, попробуйте изменить права");
+            return null;
         }
-        return null;
-    }
 
+    }
     /**
      * Checks the permissions of the file specified by the argument
      *
      * @param arg a string representing the file path to check the permissions of
-     * @throws IOException if the file does not exist or does not have the necessary permissions
      */
-    public static void checkFilePermissions(String arg) throws IOException {
+    public static boolean checkFilePermissions (String arg){
         try {
 
             // Получаем путь к файлу из первого аргумента
@@ -152,19 +149,24 @@ public class FileControl {
             }
             File file = new File(arg);
             if (!file.exists()) {
+
                 // Генерируем FileNotFoundException, если файл не существует
-                throw new FileNotFoundException("File not found");
+                throw new FileNotFoundException();
             }
             if (!file.canRead() || !file.canWrite()) {
                 // Генерируем PermissionsDeniedException, если файл не имеет необходимых прав доступа
                 throw new PermissionsDeniedException();
             }
+            return true;
         } catch (EmptyInputException e) {
             Console.err("в аргумент командной строки было передано null");
+            return false;
         } catch (FileNotFoundException e) {
-            Console.err("Файл не найден, проверьте XPath");
+            Console.err("Файл не найден, проверьте Path");
+            return false;
         } catch (IOException e) {
             Console.err("Права этого файла не позволяют использовать его, попробуйте изменить права");
+            return false;
         }
 
     }

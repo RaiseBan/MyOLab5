@@ -3,13 +3,13 @@
 package commands;
 
 import exceptions.EmptyInputException;
+import exceptions.InputException;
 import exceptions.WrongArgumentsException;
 import support.*;
 import support.Console;
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * The ExecuteScript class represents a command to execute a script file.
@@ -17,7 +17,9 @@ import java.util.Scanner;
 public class ExecuteScript extends AbstractCommand {
     CollectionControl collectionControl;
     CommunicationControl communicationControl;
-
+    boolean flag = true;
+    Stack<InputStream> stack = new Stack<>();
+    Stack<String> stackWithFiles = new Stack<>();
 
     /**
      * Constructs a new ExecuteScript instance with the specified collection and communication controls.
@@ -39,30 +41,39 @@ public class ExecuteScript extends AbstractCommand {
      */
     @Override
     public void execute(String argument) {
-
+        argument = argument.trim();
+        stackWithFiles.push(argument);
         try {
+
             if (argument.isEmpty()) throw new WrongArgumentsException();
-            FileControl.checkFilePermissions(argument);
-            fileProcessor(argument);
-            File fileData = new File("outputData.txt");
-            File fileCommands = new File("outputCommands.txt");
-            FileInputStream fileIn = new FileInputStream(fileData);
-            Scanner scanner = new Scanner(fileCommands);
+            if (!FileControl.checkFilePermissions(argument)) throw new InputException();
+            List<String> outputCommandsName = new ArrayList<>();
+            List<String> outputDataName = new ArrayList<>();
+
+            fileProcessor(argument, outputDataName, outputCommandsName);
+
+
+            String inputCommand = String.join(System.lineSeparator(), outputCommandsName);
+            InputStream fileWithCommands = new ByteArrayInputStream(inputCommand.getBytes(StandardCharsets.UTF_8));
+            String inputData = String.join(System.lineSeparator(), outputDataName);
+            InputStream fileWithData = new ByteArrayInputStream(inputData.getBytes(StandardCharsets.UTF_8));
+            Scanner scanner = new Scanner(fileWithCommands);
             communicationControl.setUnsetLoop();
 
-
-            try (fileIn) {
-
+            try (scanner) {
                 // Заменяем стандартный поток ввода на InputStream из файла
-                communicationControl.changeScanner(fileIn);
+                communicationControl.changeScanner(fileWithData);
+                stack.push(fileWithData);
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
                     String[] args = (line.trim() + " ").split(" ");
                     HashMap<String, Command> commandMap = collectionControl.sendCommandMap();
+
                     for (String key : commandMap.keySet()) {
                         if (args.length == 2) {
-                            if ((key.equalsIgnoreCase("execute_script")) && (args[1].equals(argument)))
-                                throw new WrongArgumentsException();
+                            if ((key.equalsIgnoreCase("execute_script")) && (stackWithFiles.contains(argument))){
+                                throw new WrongArgumentsException("Нельзя передавать один и тот же файл (возникает рекурсия)");
+                            }
                         }
                         if (key.equalsIgnoreCase(args[0].trim())) {
                             String argumentForExecute;
@@ -71,30 +82,36 @@ public class ExecuteScript extends AbstractCommand {
                             } else {
                                 argumentForExecute = "";
                             }
-
+                            if (key.equalsIgnoreCase("execute_script")){
+                                flag = false;
+                            }
                             commandMap.get(key).execute(argumentForExecute);
-
                         }
                     }
                 }
-            }catch (WrongArgumentsException e){
-                Console.err("аргументик то, не тот ЫХХЫХЫХЫ");
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            }catch (WrongArgumentsException e) {
+                Console.err(e.getMessage());
             } finally {
                 // Восстанавливаем стандартный поток ввода
-                communicationControl.setUnsetLoop();
-                communicationControl.changeScanner(System.in);
-                // Закрываем InputStream из файла
-                fileCommands.delete();
-                fileData.delete();
+
+                if (flag) {
+                    communicationControl.setUnsetLoop();
+                    communicationControl.changeScanner(System.in);
+                }else {
+                    stack.pop();
+                    try {
+                        communicationControl.changeScanner(stack.peek());
+                    }catch (EmptyStackException e){
+                        communicationControl.changeScanner(System.in);
+                    }
+                }
             }
 
         } catch (WrongArgumentsException e) {
             Console.err("название скрипта не введено");
 
         } catch (IOException e) {
-            Console.err("");
+            Console.err("нет досупа к файлу");
         }
     }
 
@@ -103,27 +120,24 @@ public class ExecuteScript extends AbstractCommand {
      *
      * @param file the script file to process
      */
-    private void fileProcessor(String file) {
-        String outputDataName = "outputData.txt";
-        String outputCommandsName = "outputCommands.txt";
-
-        try (Scanner scanner = new Scanner(new File(file));
-             FileOutputStream fosData = new FileOutputStream(outputDataName);
-             FileOutputStream fosCommand = new FileOutputStream(outputCommandsName)) {
+    private void fileProcessor(String file, List<String> outputDataName, List<String> outputCommandsName) {
+        try {
+            Scanner scanner = new Scanner(new File(file));
             while (scanner.hasNextLine()) {
                 String[] args;
                 String line = scanner.nextLine();
                 args = (line.trim() + " ").split(" ", 2);
                 if (args.length == 0) throw new EmptyInputException();
                 if (!collectionControl.sendCommandMap().containsKey(args[0].trim())) {
-                    fosData.write((line + "\n").getBytes());
+                    outputDataName.add(line);
                 } else {
-                    fosCommand.write((args[0] + " " + args[1] + "\n").getBytes());
+                    outputCommandsName.add(args[0] + " " + args[1]);
                 }
             }
 
         } catch (IOException e) {
             Console.writeln("Файла не найдено");
+            e.printStackTrace();
         }
     }
 }
