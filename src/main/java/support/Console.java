@@ -2,7 +2,6 @@
 package support;
 
 import commands.Command;
-import commands.Exit;
 import data.Worker;
 import exceptions.EmptyInputException;
 import exceptions.InputException;
