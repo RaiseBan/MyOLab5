@@ -67,7 +67,7 @@ public class Console {
             } catch (EmptyInputException e) {
                 Console.err(e.getMessage());
             }catch(NoSuchElementException e){
-                Console.err("НЕльзя так");
+                Console.err("Завершение программы...");
                 System.exit(0);
             }
         }
