@@ -36,8 +36,8 @@ public class RemoveElementByID extends AbstractCommand {
             int id = Integer.parseInt(argument.trim());
             collectionControl.removeElementByID(id);
             collectionControl.updateAllIDs();
-            //Console.writeln("Successfully removed element");
-            System.out.println("Successfully removed");
+            Console.writeln("Successfully removed element");
+            //System.out.println("Successfully removed");
         } catch (NumberFormatException e) {
             Console.err("Incorrect ID format");
         } catch (WrongArgumentsException e) {

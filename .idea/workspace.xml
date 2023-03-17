@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4815b392-c1ba-4fda-9f56-81bcccaca83f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/support/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/Console.java" afterDir="false" />
-    </list>
+    <list default="true" id="4815b392-c1ba-4fda-9f56-81bcccaca83f" name="Changes" comment="Minor update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +78,7 @@
       <workItem from="1678728073272" duration="1747000" />
       <workItem from="1678739554475" duration="755000" />
       <workItem from="1678865286419" duration="8869000" />
-      <workItem from="1679059523029" duration="1553000" />
+      <workItem from="1679059523029" duration="2356000" />
     </task>
     <task id="LOCAL-00001" summary="commited">
       <created>1677333325898</created>
@@ -181,7 +178,21 @@
       <option name="project" value="LOCAL" />
       <updated>1678728394674</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Corrected typos">
+      <created>1679061381926</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679061381926</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Minor update">
+      <created>1679061756400</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679061756400</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +212,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commited" />
     <MESSAGE value="Final" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final" />
+    <MESSAGE value="Corrected typos" />
+    <MESSAGE value="Minor update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor update" />
   </component>
 </project>
