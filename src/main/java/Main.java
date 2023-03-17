@@ -4,7 +4,7 @@ import support.*;
 import java.util.Scanner;
 
 /**
- * Entry point to the program. Creates objects for the program to work
+ * Entry point to the program. Create objects for the program to work
  */
 
 public class Main {

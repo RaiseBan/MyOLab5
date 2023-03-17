@@ -11,11 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4815b392-c1ba-4fda-9f56-81bcccaca83f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScript.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/support/CollectionControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/CollectionControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/support/FileControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/FileControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/support/ParserXml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/ParserXml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/support/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/Console.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +81,7 @@
       <workItem from="1678728073272" duration="1747000" />
       <workItem from="1678739554475" duration="755000" />
       <workItem from="1678865286419" duration="8869000" />
+      <workItem from="1679059523029" duration="1553000" />
     </task>
     <task id="LOCAL-00001" summary="commited">
       <created>1677333325898</created>
@@ -189,6 +186,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commited" />

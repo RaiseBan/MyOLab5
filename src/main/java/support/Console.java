@@ -62,7 +62,7 @@ public class Console {
                 if (userCommand.length == 0) throw new EmptyInputException();
                 chooseCommand(userCommand).execute(userCommand[1]);
             } catch (InputException e) {
-                Console.err("Введенной команды не существет. Введите командочку help");
+                Console.err("Введенной команды не существует. Введите командочку help");
             } catch (EmptyInputException e) {
                 Console.err(e.getMessage());
             }catch(NoSuchElementException e){
