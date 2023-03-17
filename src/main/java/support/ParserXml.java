@@ -73,7 +73,7 @@ public class ParserXml {
      * @return a new Worker object with the extracted data.
      * @throws InputException if the extracted data is invalid.
      */
-    private Worker getWorker(Node node) throws InputException {
+    private Worker getWorker(Node node) throws Exception {
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element element = (Element) node;
             String name = getTagValue("name", element);
@@ -114,7 +114,7 @@ public class ParserXml {
      * @return a new Person object.
      * @throws InputException if the height is greater than 350 or the passport ID is not exactly 6 characters long.
      */
-    private Person getPerson(Element element) throws InputException {
+    private Person getPerson(Element element) throws Exception {
 
         Element personElement = (Element) element.getElementsByTagName("person").item(0);
         LocalDateTime birthday = getLocalDateTime(getTagValue("birthday", personElement));
@@ -160,18 +160,12 @@ public class ParserXml {
      * @param dateStr the input date string to be parsed.
      * @return a LocalDateTime object.
      */
-    public LocalDateTime getLocalDateTime(String dateStr) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("ru", "Ru"));
-            LocalDateTime bd = LocalDate.parse(dateStr, formatter).atStartOfDay();
-            if (bd.isAfter(LocalDate.now().atStartOfDay())) throw new WrongArgumentsException();
-            return bd;
-        } catch (WrongArgumentsException e) {
-            Console.err(e.getMessage());
-            return null;
-        } catch (DateTimeParseException e) {
-            Console.err("Неверный формат даты: " + dateStr);
-            return null;
-        }
+    public LocalDateTime getLocalDateTime(String dateStr) throws Exception {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", new Locale("ru", "Ru"));
+        LocalDateTime bd = LocalDate.parse(dateStr, formatter).atStartOfDay();
+        if (bd.isAfter(LocalDate.now().atStartOfDay())) throw new WrongArgumentsException();
+        return bd;
+
     }
 }

@@ -27,11 +27,13 @@ public class SaveCollection extends AbstractCommand {
     @Override
     public void execute(String argument) {
         try {
-            if (argument.isEmpty()) throw new WrongArgumentsException();
-            collectionControl.saveCollection(argument);
+            if (!argument.isEmpty()) throw new WrongArgumentsException();
+            collectionControl.saveCollection();
 
         } catch (WrongArgumentsException e) {
             Console.err(e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

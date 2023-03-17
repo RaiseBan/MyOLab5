@@ -94,9 +94,9 @@ public class CollectionControl {
      *
      * @param file the name of the file to save the collection to
      */
-    public void saveCollection(String file) {
+    public void saveCollection() {
         try {
-            fileControl.writeToFile(workersCollection, file);
+            fileControl.writeToFile(workersCollection);
         } catch (IOException | XMLStreamException e) {
             throw new RuntimeException(e);
         }

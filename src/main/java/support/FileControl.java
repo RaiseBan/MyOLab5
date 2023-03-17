@@ -39,14 +39,13 @@ public class FileControl {
      * Writes a list of workers to an XML file specified by the given path. The XML file will contain the name, coordinates,
      * salary, position, status, and personal information (birthday, height, passportID, and location) of each worker.
      *
-     * @param workers the list of workers to be written to the file
-     * @param file    the path of the file to be written
+     * @param workers the list of workers to be written to the fil
      * @throws IOException        if an I/O error occurs while writing the file
      * @throws XMLStreamException if an error occurs while writing the XML document
      */
-    public void writeToFile(ArrayList<Worker> workers, String file) throws IOException, XMLStreamException {
+    public void writeToFile(ArrayList<Worker> workers) throws IOException, XMLStreamException {
         try {
-            file = file.trim().trim();
+            String file = this.file[0].trim();
             XMLOutputFactory factory = XMLOutputFactory.newInstance();
             XMLStreamWriter writer = factory.createXMLStreamWriter(new FileOutputStream(file), "UTF-8");
             writer.writeStartDocument("UTF-8", "1.0");
@@ -105,6 +104,8 @@ public class FileControl {
             writer.close();
         } catch (FileNotFoundException e) {
             Console.err("сюда сохранить невозможно!");
+        } catch (Exception e){
+            Console.err("неверные данные записи");
         }
     }
 

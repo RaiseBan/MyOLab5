@@ -10,7 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4815b392-c1ba-4fda-9f56-81bcccaca83f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/support/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/support/CollectionControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/CollectionControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/support/FileControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/FileControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/support/ParserXml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/support/ParserXml.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,20 +41,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/shorn/IdeaProjects/MyLab5",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/shorn/IdeaProjects/MyLab5&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shorn\IdeaProjects\MyLab5\src\main\java" />
@@ -77,7 +82,9 @@
       <workItem from="1677562605710" duration="12559000" />
       <workItem from="1677654266389" duration="24116000" />
       <workItem from="1678083127707" duration="27064000" />
-      <workItem from="1678728073272" duration="312000" />
+      <workItem from="1678728073272" duration="1747000" />
+      <workItem from="1678739554475" duration="755000" />
+      <workItem from="1678865286419" duration="8869000" />
     </task>
     <task id="LOCAL-00001" summary="commited">
       <created>1677333325898</created>
@@ -170,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678728355237</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Final">
+      <created>1678728394674</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1678728394674</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

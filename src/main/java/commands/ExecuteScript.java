@@ -71,8 +71,11 @@ public class ExecuteScript extends AbstractCommand {
 
                     for (String key : commandMap.keySet()) {
                         if (args.length == 2) {
-                            if ((key.equalsIgnoreCase("execute_script")) && (key.equalsIgnoreCase(args[0].trim())) && (stackWithFiles.contains(argument))){
-                                System.out.println(key);
+                            if ((key.equalsIgnoreCase("execute_script")) && (key.equalsIgnoreCase(args[0].trim())) && (stackWithFiles.contains(args[1]))){
+                                for (String str :stackWithFiles){
+                                    System.out.println(str);
+                                }
+                                System.out.println(argument);
                                 throw new WrongArgumentsException("Нельзя передавать один и тот же файл (возникает рекурсия)");
                             }
                         }
