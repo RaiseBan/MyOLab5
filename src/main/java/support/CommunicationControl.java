@@ -6,6 +6,8 @@ import exceptions.EmptyInputException;
 import exceptions.InputException;
 import exceptions.WrongArgumentsException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,11 +61,9 @@ public class CommunicationControl {
 
     /**
      * Changes the scanner object to read input from the given input stream.
-     *
-     * @param inputStream the input stream to be used for reading input from the console
      */
-    public void changeScanner(InputStream inputStream) {
-        this.scanner = new Scanner(inputStream);
+    public void changeScanner(Scanner scanner) throws FileNotFoundException {
+        this.scanner = scanner;
     }
 
 

@@ -90,6 +90,7 @@ public class Console {
     }
 
 
+
     /**
      * Outputs the specified object to the console, without adding a newline character.
      *

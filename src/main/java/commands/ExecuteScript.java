@@ -40,108 +40,79 @@ public class ExecuteScript extends AbstractCommand {
      * @param argument the argument for the command
      */
     @Override
-    public void execute(String argument) {
+    public void execute(String argument) throws FileNotFoundException {
         argument = argument.trim();
         stackWithFiles.push(argument);
-        try {
 
+
+        try (Scanner scanner = new Scanner(new File(argument))) {
+            stackWithScanners.push(scanner);
+            communicationControl.changeScanner(scanner);
             if (argument.isEmpty()) throw new WrongArgumentsException();
             if (!FileControl.checkFilePermissions(argument)) throw new InputException();
-            List<String> outputCommandsName = new ArrayList<>();
-            List<String> outputDataName = new ArrayList<>();
-
-            fileProcessor(argument, outputDataName, outputCommandsName);
-
-
-            String inputCommand = String.join(System.lineSeparator(), outputCommandsName);
-            InputStream fileWithCommands = new ByteArrayInputStream(inputCommand.getBytes(StandardCharsets.UTF_8));
-            String inputData = String.join(System.lineSeparator(), outputDataName);
-            InputStream fileWithData = new ByteArrayInputStream(inputData.getBytes(StandardCharsets.UTF_8));
-            Scanner scanner = new Scanner(fileWithCommands);
             communicationControl.setUnsetLoop();
-
-            try (scanner) {
-                // Заменяем стандартный поток ввода на InputStream из файла
-                communicationControl.changeScanner(fileWithData);
-                stack.push(fileWithData);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine().trim();
-                    String[] args = (line.trim() + " ").split(" ");
-                    HashMap<String, Command> commandMap = collectionControl.sendCommandMap();
-
-                    for (String key : commandMap.keySet()) {
-                        if (args.length == 2) {
-                            if ((key.equalsIgnoreCase("execute_script")) && (key.equalsIgnoreCase(args[0].trim())) && (stackWithFiles.contains(args[1]))){
-                                for (String str :stackWithFiles){
-                                    System.out.println(str);
-                                }
-                                System.out.println(argument);
-                                throw new WrongArgumentsException("Нельзя передавать один и тот же файл (возникает рекурсия)");
-                            }
-                        }
-                        if (key.equalsIgnoreCase(args[0].trim())) {
-                            String argumentForExecute;
-                            if (args.length == 2) {
-                                argumentForExecute = args[1];
-                            } else {
-                                argumentForExecute = "";
-                            }
-                            if (key.equalsIgnoreCase("execute_script")){
-                                flag = false;
-                            }
-                            commandMap.get(key).execute(argumentForExecute);
-                        }
-                    }
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                System.out.println(line);
+                String[] args = (line.trim()).split(" ");
+                if (!checkRecursion(line)) {
+                    throw new RecursionException("Обнаружена рекурсия! Уберите");
                 }
-            }catch (WrongArgumentsException e) {
-                Console.err(e.getMessage());
-            } finally {
-                // Восстанавливаем стандартный поток ввода
+                HashMap<String, Command> commandMap = collectionControl.sendCommandMap();
 
-                if (flag) {
-                    communicationControl.setUnsetLoop();
-                    communicationControl.changeScanner(System.in);
-                }else {
-                    stack.pop();
-                    try {
-                        communicationControl.changeScanner(stack.peek());
-                    }catch (EmptyStackException e){
-                        communicationControl.changeScanner(System.in);
+                for (String key : commandMap.keySet()) {
+                    if (key.equalsIgnoreCase(args[0].trim())) {
+                        String argumentForExecute;
+                        if (args.length == 2) {
+                            argumentForExecute = args[1];
+                        } else {
+                            argumentForExecute = "";
+                        }
+                        if (key.equalsIgnoreCase("execute_script")) {
+
+                            flag = false;
+                        }
+                        commandMap.get(key).execute(argumentForExecute);
                     }
                 }
             }
 
+        } catch (RecursionException e) {
+            System.out.println(e.getMessage());
+        } catch (InputException e) {
+            Console.err("InputException");
         } catch (WrongArgumentsException e) {
-            Console.err("название скрипта не введено");
-
-        } catch (IOException e) {
-            Console.err("нет досупа к файлу");
+            Console.err("Мало аргементов");
+        } finally {
+            if (flag) {
+                communicationControl.setUnsetLoop();
+                communicationControl.changeScanner(new Scanner(System.in));
+            }else {
+                stackWithScanners.pop();
+                try {
+                    communicationControl.changeScanner(stackWithScanners.peek());
+                }catch (EmptyStackException | FileNotFoundException e){
+                    communicationControl.changeScanner(new Scanner(System.in));
+                }
+            }
         }
+
     }
 
-    /**
-     * Processes the script file and writes the commands to a file.
-     *
-     * @param file the script file to process
-     */
-    private void fileProcessor(String file, List<String> outputDataName, List<String> outputCommandsName) {
+    public boolean checkRecursion(String currentCommand) {
         try {
-            Scanner scanner = new Scanner(new File(file));
-            while (scanner.hasNextLine()) {
-                String[] args;
-                String line = scanner.nextLine();
-                args = (line.trim() + " ").split(" ", 2);
-                if (args.length == 0) throw new EmptyInputException();
-                if (!collectionControl.sendCommandMap().containsKey(args[0].trim())) {
-                    outputDataName.add(line);
-                } else {
-                    outputCommandsName.add(args[0] + " " + args[1]);
-                }
-            }
+            if (Objects.equals(currentCommand.split(" ")[0], "execute_script") && stackWithFiles.contains(currentCommand.split(" ")[1])) {
+                return false;
 
-        } catch (IOException e) {
-            Console.writeln("Файла не найдено");
-            e.printStackTrace();
+            } else if (Objects.equals(currentCommand.split(" ")[0], "execute_script") && !stackWithFiles.contains(currentCommand.split(" ")[1])) {
+                Path path = Paths.get(currentCommand.split(" ")[1]);
+                stackWithFiles.push(currentCommand.split(" ")[1]);
+                //chosenScanner = new Scanner(path);
+            }
+        } catch (Exception e) {
+            System.out.println("Ты ошибка!");
         }
+        return true;
     }
 }
+
