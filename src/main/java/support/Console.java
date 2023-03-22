@@ -6,8 +6,10 @@ import data.Worker;
 import exceptions.EmptyInputException;
 import exceptions.InputException;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 /**
  * A class that represents a console for interacting with the program. It handles user input, executes commands, and
@@ -68,6 +70,8 @@ public class Console {
             }catch(NoSuchElementException e){
                 Console.err("Завершение программы...");
                 System.exit(0);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }

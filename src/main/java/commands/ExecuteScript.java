@@ -4,11 +4,14 @@ package commands;
 
 import exceptions.EmptyInputException;
 import exceptions.InputException;
+import exceptions.RecursionException;
 import exceptions.WrongArgumentsException;
 import support.*;
 import support.Console;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -18,8 +21,8 @@ public class ExecuteScript extends AbstractCommand {
     CollectionControl collectionControl;
     CommunicationControl communicationControl;
     boolean flag = true;
-    Stack<InputStream> stack = new Stack<>();
-    Stack<String> stackWithFiles = new Stack<>();
+    static Stack<String> stackWithFiles = new Stack<>();
+    static Stack<Scanner> stackWithScanners = new Stack<>();
 
     /**
      * Constructs a new ExecuteScript instance with the specified collection and communication controls.
